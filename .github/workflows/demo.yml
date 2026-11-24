@@ -1,0 +1,30 @@
+name: demo
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pytest && pytest -q
+  dev:
+    needs: pruebas
+    if: github.ref == 'refs/heads/main'
+    environment: dev
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Desplegando a dev (simulado). /salud -> ok"
+  prod:
+    needs: pruebas
+    if: startsWith(github.ref, 'refs/tags/v')
+    environment: prod
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Desplegando a prod (simulado). Aprobado por el dueño."
