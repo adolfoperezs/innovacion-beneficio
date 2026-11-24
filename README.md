@@ -1,2 +1,2 @@
 # innovacion-beneficio
-Demo clase IA Innovación Syncore × XeraX · flujo dev/prod con datos ficticios
+Demo clase IA Innovación Syncore × XeraX · flujo dev/prod con datos ficticios para la clase
